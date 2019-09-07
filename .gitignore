@@ -3,5 +3,5 @@
 
 # But not these files...
 !.gitignore
-! *.py
-! *.ipynb
+!*.py
+!*.ipynb
