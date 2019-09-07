@@ -4,4 +4,4 @@
 # But not these files...
 !.gitignore
 !*.py
-!*.ipynb
+# !*.ipynb #just keep .py for now while EDA is ongoing in notebooks.
