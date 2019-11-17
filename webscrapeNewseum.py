@@ -43,7 +43,10 @@ if check=='y':
     #Check if directory for saving results already exists. If not, make new one:
     try:
         os.listdir(os.path.join("data",t))
-        print('directory already exists')
+        print('directory already exists. Checking if some headlines already found...')
+        print(len(os.listdir(os.path.join("data",t))), 'headlines found. Updating list of headlines to find...')
+        soup_pdf_links=[link for link in soup_pdf_links if link.split('/')[-1] not in ['_'.join(elm.split('_')[1:]) for elm in os.listdir(os.path.join("data",t))]]
+        print('New size of set to find:',len(soup_pdf_links))
     except:
         print('making new directory')
         os.mkdir(os.path.join("data",t))
@@ -56,7 +59,10 @@ if check=='y':
             else:
                 n=url.split('/pdf%s/'%(strftime("%d")))[1]#today
             label=t+"_"+n
+            t1=time.time()
             urllib.request.urlretrieve(url, 'data/%s/%s'%(t,label))
+            t2=time.time()
+            #print(url,' took', t2-t1, 'seconds.')
             wait=random.randrange(10,30,1)*.1;
             time.sleep(wait) #to not abuse the newseum's servers, adding a delay. Making it a bit random to play with mimicing a human.
             if x%10==0:
